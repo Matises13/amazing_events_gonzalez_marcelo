@@ -42,3 +42,16 @@ main{
     height: 12rem;
     object-fit: cover;
 }
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.icons_foot img{
+    padding: 30px;
+    width: 80px;
+}
+
