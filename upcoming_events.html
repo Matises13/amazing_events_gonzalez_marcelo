@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>Upcoming_events</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -25,11 +27,11 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./upcoming_events.html">Upcoming Events</a>
+                                <a class="nav-link" aria-current="page" href="./index.html">Home</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link active" href="#">Upcoming Events</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./past_events.html">Past Events</a>
@@ -46,111 +48,172 @@
         </div>
 
     </header>
-    <div class="banner">
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner" d-flex>
-                <div class="carousel-item active">
-                    <img src="./assets/img/Blog-Aucal-41-820x410.png" class="d-block" alt="...">
+    <main>
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" 
+                    aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="active"
+                aria-current="true" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-inner">
+                <div id="home_carrousel" class="carousel-item">
+                    <h2 class="text-white text-center mb-5">Home</h2>
+                </div>
+                <div id="upcoming_carrousel" class="carousel-item active">
+                    <h2 class="text-white text-center mb-5">Upcoming Events</h2>
+                </div>
+                <div id="past_carrousel" class="carousel-item">
+                    <h2 class="text-white text-center mb-5">Past Events</h2>
+                </div>
+                <div id="carrousel_contact" class="carousel-item">
+                    <h2 class="text-white text-center mb-5">Contact</h2>
+                </div>
+                <div id="carrousel_stats" class="carousel-item">
+                    <h2 class="text-white text-center mb-5">Stats</h2>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </div>
+        <div class="navbar navbar-expand-lg bg-body-tertiary mb-5">
+            <div class="container-fluid">
+                <div>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">Category</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">Category</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3">Category</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option4">
+                            <label class="form-check-label" for="inlineCheckbox2">Category</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option5">
+                            <label class="form-check-label" for="inlineCheckbox3">Category</label>
+                        </div>
+                    </div>
+                </div>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg></button>
 
-
-    <main class="d-flex">
-            <div>
-                <div class="card" style="width: 25rem; gap:2;">
-                    <img src="./assets/img/Cinema.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card .</p>
-                    </div>
-    
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 25rem;">
-                    <img src="./assets/img/Costume_Party.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card.</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 25rem;">
-                    <img src="./assets/img/Food_Fair.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card.</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="card" style="width: 25rem;">
-                    <img src="./assets/img/Marathon.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card.</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 25rem;">
-                    <img src="./assets/img/Museum_Tour.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card.</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 25rem;">
-                    <img src="./assets/img/Music_Concert.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card.</p>
-                    </div>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                    </div>
-                </div>
+                </form>
 
             </div>
+        </div>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+            <div class="card" style="width: 25rem; gap:2;">
+                <img src="./assets/img/Cinema.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card .</p>
+                </div>
 
+                <div class="card-body">
+                    <a href="#" class="card-link">Details</a>
+                </div>
+            </div>
+            <div class="card" style="width: 25rem;">
+                <img src="./assets/img/Costume_Party.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link">Details</a>
+                </div>
+            </div>
+            <div class="card" style="width: 25rem;">
+                <img src="./assets/img/Food_Fair.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link">Details</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 25rem;">
+                <img src="./assets/img/Marathon.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link">Details</a>
+                </div>
+            </div>
+            <div class="card" style="width: 25rem;">
+                <img src="./assets/img/Museum_Tour.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link">Details</a>
+                </div>
+            </div>
+            <div class="card" style="width: 25rem;">
+                <img src="./assets/img/Music_Concert.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card.</p>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link">Details</a>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <footer>
-    <div class="icons_foot">
-        <a href="https://www.instagram.com/"><img class="h-10" src="./assets/img/img_instagram.jpg"
-                alt="Instagram"></a>
-        <a href="https://www.facebook.com/"><img class="h-30" src="./assets/img/img_facebbok.png" alt="Facebook"></a>
-        <a href="https://web.whatsapp.com/"><img class="h-30" src="./assets/img/img_whatshapp.png" alt="Whatsapp"></a>
-    </div>
+        <div class="icons_foot mt-4">
+            <a href="https://www.instagram.com/"><img class="h-10" src="./assets/img/img_instagram.jpg"
+                    alt="Instagram"></a>
+            <a href="https://www.facebook.com/"><img class="h-30" src="./assets/img/img_facebbok.png"
+                    alt="Facebook"></a>
+            <a href="https://web.whatsapp.com/"><img class="h-30" src="./assets/img/img_whatshapp.png"
+                    alt="Whatsapp"></a>
+        </div>
 
-    <div class="foot_text">
-        <h1>COHORT</h1>
-    </div>
+        <div class="foot_text mt-5">
+            <h1>FE08-TN</h1>
+        </div>
 
-</footer>
-    
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

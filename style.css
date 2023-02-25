@@ -12,25 +12,23 @@ header{
 .logo{
     height: 50px;
 }
-
-main{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-content: space-around;
+#home_carrousel{
+    background: url("./assets/img/Blog-Aucal-41-820x410.png");
 }
-
-.carousel-item{
-    height: 600px;
+#upcoming_carrousel{
+    background: url("./assets/img/link_eventos.jpg");
 }
-
-.carousel-inner{
-    width: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#past_carrousel{
+    background: url("./assets/img/images_past.jpg");
 }
-
+#carrousel_contact{
+    background: url("./assets/img/contact.jpg");
+    background-size: cover;
+}
+#carrousel_stats{
+    background: url("./assets/img/stats.jpg");
+    background-size: cover;
+}
 .cards{
     display: flex;
     flex-direction:column;
@@ -48,10 +46,11 @@ footer{
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
+    background-color: gray;
 }
 
 .icons_foot img{
     padding: 30px;
-    width: 80px;
+    width: 100px;
 }
 
