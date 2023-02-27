@@ -20,7 +20,11 @@ let date_past = Date.parse(element.date)
             <h5 class="card-title">${element.name}</h5>
             <p class="card-text">${element.description}</p>
             <p class="card-text">Price:${element.price} </p>
+            <div class="card-body">
+            <a href="./details.html" class="card-link">Details</a>
+        </div>
         </div>`
+        
     fragment.appendChild(div)
     }
 }
