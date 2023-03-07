@@ -5,9 +5,13 @@
     font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 header{
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    gap: 500px;
+    gap: 500px; */
+    min-height: 15vh;
+}
+main{
+    min-height: 75vh;
 }
 .logo{
     height: 50px;
@@ -47,6 +51,7 @@ footer{
     justify-content: space-around;
     align-content: center;
     background-color: gray;
+    min-height: 10vh;
 }
 
 .icons_foot img{
