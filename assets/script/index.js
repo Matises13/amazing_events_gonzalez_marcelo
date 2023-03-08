@@ -3,26 +3,30 @@
 const card_home = document.getElementById('card_home')
 
 
-let fragment = document.createDocumentFragment()
+function renderizado(listaCards, contenedor) {
+    let fragment = document.createDocumentFragment()
+    contenedor.innerHTML = '';
 
-for (let element of data.events) {
-    let div = document.createElement('div')
-    div.classList.add("card")
-    div.style.width = "25rem"
-    div.style.gap = "2"
-    div.innerHTML = `<img src="${element.image}" class="card-img-top" alt="...">
-    <div class="card-body">
+    for (let element of listaCards) {
+        let div = document.createElement('div')
+        div.classList.add("card")
+        div.style.width = "25rem"
+        div.style.gap = "2"
+        div.innerHTML = `<img src="${element.image}" class="card-img-top" alt="...">
+        <div class="card-body">
         <h5 class="card-title">${element.name}</h5>
         <p class="card-text">${element.description}</p>
         <p class="card-text">Price:${element.price} </p>
         <div class="card-body">
         <a href="./details.html" class="card-link">Details</a>
         </div>
-    </div>`
-    fragment.appendChild(div)
+        </div>`
+        fragment.appendChild(div)
+    }
+    contenedor.appendChild(fragment)
 }
 
-card_home.appendChild(fragment)
+renderizado(data.events,card_home)
 
 //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
 
@@ -51,10 +55,11 @@ function checkbox(array) {
     let fragmentCheck = document.createDocumentFragment()
 
     for (let categoria of result) {
+
         let div = document.createElement('div')
-        div.style.gap = "2"
-        div.innerHTML = `<label for=${categoria}.split(" ").join("")>${categoria}</label>
-    <input type="checkbox" name="categorias" id=${categoria}.split(" ").join("_")>`
+        div.classList.add("mx-2")
+        div.innerHTML = `<label for=${categoria.split(" ").join("")}>${categoria}</label>
+    <input type="checkbox" value="${categoria}" name="categorias" id=${categoria.split(" ").join("_")}>`
         fragmentCheck.appendChild(div)
     }
     return fragmentCheck
@@ -65,21 +70,24 @@ function checkbox(array) {
 let checkboxes = document.querySelectorAll('input[type = checkbox]')
 console.log(checkboxes);
 
-checkboxes.forEach( checkbox => {checkbox.addEventListener('change', verificarSeleccion)})
+checkboxes.forEach(checkbox => { checkbox.addEventListener('change', verificarSeleccion) })
 
-function verificarSeleccion(){
+function verificarSeleccion() {
     let inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked)
     console.log(inputsChequeados);
 
-let inputsValue = inputsChequeados.map(input => input.value);
-console.log(inputsValue);
-
-let eventosFiltrados = data.events.filter(e => inputsValue.includes(e.category))
-
-console.log(eventosFiltrados);
-
+    let inputsValue = inputsChequeados.map(input => input.value);
+    let arregloCardsFiltradas = filtrarArreglos(inputsValue, data.events);
+    renderizado(arregloCardsFiltradas,card_home)
 
 }
+
+function filtrarArreglos(arrayString, listaCards) {
+    if (arrayString.length === 0) return listaCards
+    return listaCards.filter(elemento => arrayString.includes(elemento.category))
+}
+
+//----------------------------------------Filtrar por Search--------------------------------------------------//
 
 // let inputText = document.getElementById('text-input')
 // inputText.addEventListener('keyup', (event)=>{
