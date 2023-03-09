@@ -1,25 +1,26 @@
-const queryString = location.search;
+const id = new URLSearchParams(location.search).get("id")
 
-const params = new URLSearchParams(queryString);
+const details = data.events.find(elemento => elemento._id == id)
+console.log(details)
+createCards(details)
 
-const id = params.get("id");
-
-const details = data.find(card => card.id == id)
-
-const div = document.querySelector("#container")
-div.innerHTML = `<div class="card">
-                <img src="./assets/img/Marathon.jpg" class="card-img-top" alt="...">
+function createCards(details) {
+    let div = document.getElementById("container");
+    div.innerHTML = `<div class="card">
+                <img src="${details.image} " class="card-img-top" alt="${details.name} ">
                 <div class="card-body">
-                <h5 class="card-title">Card name</h5>
-                <p class="card-text">Some quick example text to build on the card.</p>
-                <p class="card-text">Description.</p>
-                <p class="card-text">Category.</p>
-                <p class="card-text">Place.</p>
-                <p class="card-text">Capacity.</p>
-                <p class="card-text">Assistance or estimate.</p>
-                <p class="card-text">Price.</p>
+                <h5 class="card-title">${details.name} </h5>
+                <p class="card-text">Date: ${details.date} </p>
+                <p class="card-text">Description: ${details.description} </p>
+                <p class="card-text">Category: ${details.category} </p>
+                <p class="card-text">Place: ${details.place} </p>
+                <p class="card-text">Capacity: ${details.capacity} </p>
+                <p class="card-text">Assistance or estimate: ${details.assistance} </p>
+                <p class="card-text">Price: $ ${details.price} </p>
                 </div>
                 <div class="card-body">
-                <a href="#" class="card-link">Details</a>
+                <input class="card-link" type="button" value="Back" onClick="history.go(-1);">
                 </div>
                 </div>`
+    details.appendChild(div)
+}

@@ -4,29 +4,36 @@ const card_home = document.getElementById('card_home')
 
 
 function renderizado(listaCards, contenedor) {
-    let fragment = document.createDocumentFragment()
     contenedor.innerHTML = '';
 
-    for (let element of listaCards) {
-        let div = document.createElement('div')
-        div.classList.add("card")
-        div.style.width = "25rem"
-        div.style.gap = "2"
-        div.innerHTML = `<img src="${element.image}" class="card-img-top" alt="...">
+    if (listaCards.length > 0) {
+
+        let fragment = document.createDocumentFragment()
+        for (let element of listaCards) {
+            let div = document.createElement('div')
+            div.classList.add("card")
+            div.style.width = "25rem"
+            div.style.gap = "2"
+            div.innerHTML = `<img src="${element.image}" class="card-img-top" alt="...">
         <div class="card-body">
         <h5 class="card-title">${element.name}</h5>
         <p class="card-text">${element.description}</p>
         <p class="card-text">Price:${element.price} </p>
         <div class="card-body">
-        <a href="./details.html" class="card-link">Details</a>
+        <a href="./details.html?id=${element._id}" class="card-link">Details</a>
         </div>
         </div>`
-        fragment.appendChild(div)
+            fragment.appendChild(div)
+        }
+        contenedor.appendChild(fragment)
+    }else{
+        let div = document.createElement('div')
+        div.innerHTML = `<p>No hay resultados para su busqueda</p>`
+        contenedor.appendChild(div)
     }
-    contenedor.appendChild(fragment)
 }
 
-renderizado(data.events,card_home)
+renderizado(data.events, card_home)
 
 //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
 
@@ -66,19 +73,17 @@ function checkbox(array) {
 }
 
 //---------------------------------------- Filtrar las checkbox ------------------------------------------/
-
+let inputsChequeados = []
 let checkboxes = document.querySelectorAll('input[type = checkbox]')
 console.log(checkboxes);
 
 checkboxes.forEach(checkbox => { checkbox.addEventListener('change', verificarSeleccion) })
 
 function verificarSeleccion() {
-    let inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked)
+    inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
     console.log(inputsChequeados);
 
-    let inputsValue = inputsChequeados.map(input => input.value);
-    let arregloCardsFiltradas = filtrarArreglos(inputsValue, data.events);
-    renderizado(arregloCardsFiltradas,card_home)
+    filtrosCruzados(data.events)
 
 }
 
@@ -88,13 +93,21 @@ function filtrarArreglos(arrayString, listaCards) {
 }
 
 //----------------------------------------Filtrar por Search--------------------------------------------------//
+let stringSearch = ""
+const inputText = document.getElementById('search')
+inputText.addEventListener('keyup', (e) => {
+    stringSearch = e.target.value
+    filtrosCruzados(data.events)
+})
 
-// let inputText = document.getElementById('text-input')
-// inputText.addEventListener('keyup', (event)=>{
-//     console.log(inputText.value)
-// let nombre = lista de Input.fine(nombre =>{
-//     nombre.serch(e.target.value)
-//     retur nombre.toLowerCase().serch(e.target.value.toLowerCase().trim() ) !=1
-// } )
+function searchWord(wordToSearch, listaCards) {
+    if (wordToSearch == "") return listaCards
+    return listaCards.filter(elemento => elemento.name.toLowerCase().includes(wordToSearch.toLowerCase().trim()))
+}
 
-// })
+function filtrosCruzados(listaCards) {
+    let arrayCheck = filtrarArreglos(inputsChequeados, listaCards)
+    let arraySearch = searchWord(stringSearch, arrayCheck)
+
+    renderizado(arraySearch, card_home)
+}
