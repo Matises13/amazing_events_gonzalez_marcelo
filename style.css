@@ -59,3 +59,12 @@ footer{
     width: 120px;
 }
 
+@media only screen and (max-width: 767px){
+
+    #check_box_container{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+}

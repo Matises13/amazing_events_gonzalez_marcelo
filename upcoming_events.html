@@ -52,10 +52,10 @@
     <main>
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" 
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                     aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class="active"
-                aria-current="true" aria-label="Slide 2"></button>
+                    aria-current="true" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
@@ -94,8 +94,8 @@
         <div class="navbar navbar-expand-lg bg-body-tertiary mb-5">
             <div class="container-fluid">
                 <div>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <div class="form-check form-check-inline">
+                    <div class="d-flex" id="check_box_container">
+                        <!-- <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                             <label class="form-check-label" for="inlineCheckbox1">Category</label>
                         </div>
@@ -114,22 +114,16 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option5">
                             <label class="form-check-label" for="inlineCheckbox3">Category</label>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg></button>
-
+                <form class="d-flex">
+                    <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 </form>
 
             </div>
         </div>
-         <div id="card_up" class="d-flex justify-content-center flex-wrap gap-3 mt-5 mb-5">
+        <div id="card_up" class="d-flex justify-content-center flex-wrap gap-3 mt-5 mb-5">
             <!--<div class="card" style="width: 25rem; gap:2;">
                 <img src="./assets/img/Cinema.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -200,7 +194,7 @@
                 </div>
             </div>-->
 
-        </div> 
+        </div>
     </main>
 
     <footer>
