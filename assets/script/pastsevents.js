@@ -1,4 +1,4 @@
-let past_events = data.events.filter(elemento => Date.parse(elemento.date) < Date.parse(data.currentDate))
+let past_events = data.events.filter(elemento => new Date(elemento.date) < new Date(data.currentDate))
 console.log(past_events)
 
 const card_past = document.getElementById('card_past')

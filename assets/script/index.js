@@ -1,7 +1,49 @@
-//------------------------------- renderizar dinamicamente las cards ---------------------------//
-
 const card_home = document.getElementById('card_home')
 
+async function load(container) {
+    try {
+        let respuesta = await fetch("https://mindhub-xj03.onrender.com/api/amazing");
+        let data = await respuesta.json()
+
+        //------------------------------- renderizar dinamicamente las cards ---------------------------//
+        renderizado(data.events, container)
+
+        //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
+        const check_box_container = document.getElementById('check_box_container')
+        check_box_container.appendChild(checkbox(data.events))
+
+        //---------------------------------------- Filtrar las checkbox ------------------------------------------//
+
+        let checkboxes = document.querySelectorAll('input[type = checkbox]')
+        let inputsChequeados = []
+        let stringSearch = ""
+
+        //---------------------------------------- Filtrar las checkbox ------------------------------------------//
+
+        console.log(checkboxes);
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
+            console.log(inputsChequeados);
+
+            filtrosCruzados(data.events,inputsChequeados,stringSearch)})
+        })
+        //----------------------------------------Filtrar por Search--------------------------------------------------//
+
+        const inputText = document.getElementById('search');
+    
+        inputText.addEventListener('keyup', (e) => {
+            stringSearch = e.target.value
+            filtrosCruzados(data.events,inputsChequeados,stringSearch)
+        })
+    }catch(error){
+        console.log("Dentro del Catch: "+ error.message);
+    }
+}
+
+load(card_home)
+
+
+//------------------------------- renderizar dinamicamente las cards ---------------------------//
 
 function renderizado(listaCards, contenedor) {
     contenedor.innerHTML = '';
@@ -26,21 +68,17 @@ function renderizado(listaCards, contenedor) {
             fragment.appendChild(div)
         }
         contenedor.appendChild(fragment)
-    }else{
+    } else {
         let div = document.createElement('div')
         div.innerHTML = `<p>No hay resultados para su busqueda</p>`
         contenedor.appendChild(div)
     }
 }
 
-renderizado(data.events, card_home)
+// renderizado(data.events, card_home)
 
 //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
 
-
-const check_box_container = document.getElementById('check_box_container')
-
-check_box_container.appendChild(checkbox(data.events))
 
 function checkbox(array) {
 
@@ -73,40 +111,19 @@ function checkbox(array) {
 }
 
 //---------------------------------------- Filtrar las checkbox ------------------------------------------/
-let inputsChequeados = []
-let checkboxes = document.querySelectorAll('input[type = checkbox]')
-console.log(checkboxes);
-
-checkboxes.forEach(checkbox => { checkbox.addEventListener('change', verificarSeleccion) })
-
-function verificarSeleccion() {
-    inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
-    console.log(inputsChequeados);
-
-    filtrosCruzados(data.events)
-
-}
-
 function filtrarArreglos(arrayString, listaCards) {
     if (arrayString.length === 0) return listaCards
     return listaCards.filter(elemento => arrayString.includes(elemento.category))
 }
 
-//----------------------------------------Filtrar por Search--------------------------------------------------//
-let stringSearch = ""
-const inputText = document.getElementById('search')
-inputText.addEventListener('keyup', (e) => {
-    stringSearch = e.target.value
-    filtrosCruzados(data.events)
-})
-
+//-------------Filtrar por Search--------------------------------------------------//
 function searchWord(wordToSearch, listaCards) {
     if (wordToSearch == "") return listaCards
     return listaCards.filter(elemento => elemento.name.toLowerCase().includes(wordToSearch.toLowerCase().trim()))
 }
 
-function filtrosCruzados(listaCards) {
-    let arrayCheck = filtrarArreglos(inputsChequeados, listaCards)
+function filtrosCruzados(listaCards,checkInputs,stringSearch) {
+    let arrayCheck = filtrarArreglos(checkInputs, listaCards)
     let arraySearch = searchWord(stringSearch, arrayCheck)
 
     renderizado(arraySearch, card_home)
