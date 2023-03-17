@@ -83,19 +83,3 @@ function renderTabla2(arrayEvents,contenedor){
 
 stats(urlApi)
 
-
-
-
-// fetch(urlApi)
-// .then(response => response.json())
-// .then(data => {
-//     console.log(data);
-//     const eventos = data.events
-//     console.log(eventos);
-
-//     let mayorCapacidad = eventos.reduce((evento1,evento2)=>{if(evento1.capacity > evento2.capacity)return evento1
-//         return evento2})
-        
-//         console.log(mayorCapacidad);
-// }).catch(error => console.log(error));
-
