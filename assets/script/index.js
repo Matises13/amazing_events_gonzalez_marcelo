@@ -25,7 +25,7 @@ async function load(container) {
             checkbox.addEventListener('change', () => {inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
             console.log(inputsChequeados);
 
-            filtrosCruzados(data.events,inputsChequeados,stringSearch)})
+            filtrosCruzados(data.events,inputsChequeados,stringSearch,container)})
         })
         //----------------------------------------Filtrar por Search--------------------------------------------------//
 
@@ -122,9 +122,9 @@ function searchWord(wordToSearch, listaCards) {
     return listaCards.filter(elemento => elemento.name.toLowerCase().includes(wordToSearch.toLowerCase().trim()))
 }
 
-function filtrosCruzados(listaCards,checkInputs,stringSearch) {
+function filtrosCruzados(listaCards,checkInputs,stringSearch,contenedor) {
     let arrayCheck = filtrarArreglos(checkInputs, listaCards)
     let arraySearch = searchWord(stringSearch, arrayCheck)
 
-    renderizado(arraySearch, card_home)
+    renderizado(arraySearch, contenedor)
 }

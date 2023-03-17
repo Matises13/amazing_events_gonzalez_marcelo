@@ -1,9 +1,53 @@
-let past_events = data.events.filter(elemento => new Date(elemento.date) < new Date(data.currentDate))
-console.log(past_events)
-
 const card_past = document.getElementById('card_past')
 
-renderizado(past_events,card_past)
+async function load(container) {
+    try {
+        let respuesta = await fetch("https://mindhub-xj03.onrender.com/api/amazing");
+        let data = await respuesta.json()
+
+        let array_date = new Date(data.currentDate);
+        let past_events = data.events.filter(evento => new Date(evento.date) < array_date)
+        console.log(array_date)
+
+        //------------------------------- renderizar dinamicamente las cards ---------------------------//
+        renderizado(past_events, container)
+        
+        //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
+        const check_box_container = document.getElementById('check_box_container')
+        check_box_container.appendChild(checkbox(past_events))
+
+        //---------------------------------------- Filtrar las checkbox ------------------------------------------//
+
+        let checkboxes = document.querySelectorAll('input[type = checkbox]')
+        let inputsChequeados = []
+        let stringSearch = ""
+
+        //---------------------------------------- Filtrar las checkbox ------------------------------------------//
+
+        console.log(checkboxes);
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
+            console.log(inputsChequeados);
+
+            filtrosCruzados(past_events,inputsChequeados,stringSearch,container)})
+        })
+
+        //----------------------------------------Filtrar por Search--------------------------------------------------//
+
+        const inputText = document.getElementById('search');
+    
+        inputText.addEventListener('keyup', (e) => {
+            stringSearch = e.target.value
+            filtrosCruzados(past_events,inputsChequeados,stringSearch,container)
+        })
+
+
+        }catch(error){
+            console.log("Dentro del Catch: "+ error.message);
+        }
+}
+
+load(card_past)
 
 //------------------------------- renderizar dinamicamente las cards ---------------------------//
 
@@ -38,14 +82,9 @@ function renderizado(listaCards, contenedor) {
     }
 }
 
-renderizado(past_events, card_past)
+// renderizado(past_events, card_past)
 
 //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
-
-
-const check_box_container = document.getElementById('check_box_container')
-
-check_box_container.appendChild(checkbox(past_events))
 
 function checkbox(array) {
 
@@ -78,19 +117,6 @@ function checkbox(array) {
 }
 
 //---------------------------------------- Filtrar las checkbox ------------------------------------------/
-let inputsChequeados = []
-let checkboxes = document.querySelectorAll('input[type = checkbox]')
-console.log(checkboxes);
-
-checkboxes.forEach(checkbox => { checkbox.addEventListener('change', verificarSeleccion) })
-
-function verificarSeleccion() {
-    inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
-    console.log(inputsChequeados);
-
-    filtrosCruzados(past_events)
-
-}
 
 function filtrarArreglos(arrayString, listaCards) {
     if (arrayString.length === 0) return listaCards
@@ -98,23 +124,17 @@ function filtrarArreglos(arrayString, listaCards) {
 }
 
 //----------------------------------------Filtrar por Search--------------------------------------------------//
-let stringSearch = ""
-const inputText = document.getElementById('search')
-inputText.addEventListener('keyup', (e) => {
-    stringSearch = e.target.value
-    filtrosCruzados(past_events)
-})
 
 function searchWord(wordToSearch, listaCards) {
     if (wordToSearch == "") return listaCards
     return listaCards.filter(elemento => elemento.name.toLowerCase().includes(wordToSearch.toLowerCase().trim()))
 }
 
-function filtrosCruzados(listaCards) {
-    let arrayCheck = filtrarArreglos(inputsChequeados, listaCards)
+function filtrosCruzados(listaCards,checkInputs,stringSearch,contenedor) {
+    let arrayCheck = filtrarArreglos(checkInputs, listaCards)
     let arraySearch = searchWord(stringSearch, arrayCheck)
 
-    renderizado(arraySearch, card_past)
+    renderizado(arraySearch, contenedor)
 }
 
 //const dateActual = Date.parse(data.currentDate)
