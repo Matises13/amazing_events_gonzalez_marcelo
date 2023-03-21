@@ -1,27 +1,16 @@
-
 async function load () {
     try{
         let respuesta = await fetch("https://mindhub-xj03.onrender.com/api/amazing");
         let data = await respuesta.json()
-
         const id = new URLSearchParams(location.search).get("id")
-
         const details = data.events.find(elemento => elemento._id == id)
         console.log(details)
-
-        createCards(details)
-
-       
-        
-        
+        createCards(details)        
     }catch(error){
         console.log("Dentro del Catch: "+ error.message);
     }
-
 }
-
 load()
-
  //------------------------------- renderizar dinamicamente las cards ---------------------------//
  function createCards(details) {
     let div = document.getElementById("container");

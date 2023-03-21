@@ -1,62 +1,44 @@
 const card_up = document.getElementById('card_up')
-
 async function load(container) {
     try {
         let respuesta = await fetch("https://mindhub-xj03.onrender.com/api/amazing");
         let data = await respuesta.json()
-
         let array_date = new Date(data.currentDate);
         let dateFutures = data.events.filter(evento => new Date(evento.date) > array_date)
         console.log(array_date)
-
         //------------------------------- renderizar dinamicamente las cards ---------------------------//
         renderizado(dateFutures, container)
-        
         //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
         const check_box_container = document.getElementById('check_box_container')
         check_box_container.appendChild(checkbox(dateFutures))
-
         //---------------------------------------- Filtrar las checkbox ------------------------------------------//
-
         let checkboxes = document.querySelectorAll('input[type = checkbox]')
         let inputsChequeados = []
         let stringSearch = ""
-
         //---------------------------------------- Filtrar las checkbox ------------------------------------------//
-
         console.log(checkboxes);
         checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
-            console.log(inputsChequeados);
-
-            filtrosCruzados(dateFutures,inputsChequeados,stringSearch,container)})
+            checkbox.addEventListener('change', () => {
+                inputsChequeados = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value)
+                console.log(inputsChequeados);
+                filtrosCruzados(dateFutures, inputsChequeados, stringSearch, container)
+            })
         })
-
         //----------------------------------------Filtrar por Search--------------------------------------------------//
-
         const inputText = document.getElementById('search');
-    
         inputText.addEventListener('keyup', (e) => {
             stringSearch = e.target.value
-            filtrosCruzados(dateFutures,inputsChequeados,stringSearch,container)
+            filtrosCruzados(dateFutures, inputsChequeados, stringSearch, container)
         })
-
-
-        }catch(error){
-            console.log("Dentro del Catch: "+ error.message);
-        }
+    } catch (error) {
+        console.log("Dentro del Catch: " + error.message);
+    }
 }
-
 load(card_up)
-
 //------------------------------- renderizar dinamicamente las cards ---------------------------//
-
-
 function renderizado(listaCards, contenedor) {
     contenedor.innerHTML = '';
-
     if (listaCards.length > 0) {
-
         let fragment = document.createDocumentFragment()
         for (let element of listaCards) {
             let div = document.createElement('div')
@@ -75,38 +57,26 @@ function renderizado(listaCards, contenedor) {
             fragment.appendChild(div)
         }
         contenedor.appendChild(fragment)
-    }else{
+    } else {
         let div = document.createElement('div')
-        div.innerHTML = `<p>No hay resultados para su busqueda</p>`
+        div.innerHTML = `<p>There is no result for your search</p>`
         contenedor.appendChild(div)
     }
 }
-
-// renderizado(past_events, card_past)
-
 //------------------------------- Renderizar los checkbox dinamicamente-----------------------------------//
-
 function checkbox(array) {
-
     let arrayCategoria = []
-
     for (let elemento of array) {
-
         let categorias = elemento.category
         console.log(categorias)
         arrayCategoria.push(categorias)
     }
-
     let result = arrayCategoria.filter((item, index) => {
         return arrayCategoria.indexOf(item) === index;
     })
-
     // ....................................................
-
     let fragmentCheck = document.createDocumentFragment()
-
     for (let categoria of result) {
-
         let div = document.createElement('div')
         div.classList.add("mx-2")
         div.innerHTML = `<label for=${categoria.split(" ").join("")}>${categoria}</label>
@@ -115,24 +85,18 @@ function checkbox(array) {
     }
     return fragmentCheck
 }
-
 //---------------------------------------- Filtrar las checkbox ------------------------------------------/
-
 function filtrarArreglos(arrayString, listaCards) {
     if (arrayString.length === 0) return listaCards
     return listaCards.filter(elemento => arrayString.includes(elemento.category))
 }
-
 //----------------------------------------Filtrar por Search--------------------------------------------------//
-
 function searchWord(wordToSearch, listaCards) {
     if (wordToSearch == "") return listaCards
     return listaCards.filter(elemento => elemento.name.toLowerCase().includes(wordToSearch.toLowerCase().trim()))
 }
-
-function filtrosCruzados(listaCards,checkInputs,stringSearch,contenedor) {
+function filtrosCruzados(listaCards, checkInputs, stringSearch, contenedor) {
     let arrayCheck = filtrarArreglos(checkInputs, listaCards)
     let arraySearch = searchWord(stringSearch, arrayCheck)
-
     renderizado(arraySearch, contenedor)
 }
